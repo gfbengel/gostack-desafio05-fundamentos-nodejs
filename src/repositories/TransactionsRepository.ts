@@ -40,15 +40,6 @@ class TransactionsRepository {
   }
 
   public create({ title, value, type }: CreateTransactionDTO): Transaction {
-    if (type === 'outcome') {
-      const { total } = this.getBalance()
-      if (value > total) {
-        throw Error(
-          "You don't have enough balance to execute this transaction.",
-        )
-      }
-    }
-
     const transaction = new Transaction({ title, value, type })
 
     this.transactions.push(transaction)
